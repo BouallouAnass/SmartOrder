@@ -1,41 +1,22 @@
-# ADR-001: Hexagonal architecture as the base architectural style
+# ADR-001: Hexagonal Architecture as the structural pattern
 
-**Date:** <!-- fill in today's date -->
-**Status:** Accepted
-**Author:** <!-- your name -->
+## Status
+Accepted
 
 ## Context
-
-<!-- YOUR TASK: 2–3 sentences.
-What is the situation that forced this decision?
-What problem were you solving?
-Example: "SmartOrder will evolve from a monolith to microservices over 4 months.
-We needed an architecture that makes that migration safe and testable at each step." -->
+SmartOrder is a B2B procurement platform expected to grow into microservices.
+The initial monolith must be structured to allow that transition without
+rewriting business logic. The team has historically built layered monoliths
+which couple domain logic to infrastructure concerns.
 
 ## Decision
-
-<!-- YOUR TASK: 1–2 sentences stating clearly what you decided.
-Example: "We adopt hexagonal architecture (ports and adapters) as the base style
-for the SmartOrder domain layer." -->
+Adopt Hexagonal Architecture (Ports and Adapters). The domain model and use
+cases live in the core with zero dependencies on frameworks or infrastructure.
+Inbound ports define what the application can do. Outbound ports define what
+the application needs. Adapters implement those ports.
 
 ## Consequences
-
-**Good:**
-<!-- List 2–3 genuine benefits you see for this project specifically -->
--
--
--
-
-**Bad / Trade-offs:**
-<!-- List 1–2 real costs or downsides. An ADR with no downsides is not credible. -->
--
--
-
-## Alternatives considered
-
-<!-- What else did you consider? Why did you reject it?
-Example: "Classic layered architecture — rejected because domain logic ends up
-depending on JPA annotations, making unit testing slow and coupling too tight." -->
-
----
-*This ADR format is intentionally short. A decision record should be readable in 2 minutes.*
+- Domain logic is fully testable without Spring context or database
+- Adding a new delivery mechanism (REST, CLI, messaging) requires only a new adapter
+- More initial structure overhead compared to a simple layered approach
+- Developers unfamiliar with the pattern need onboarding
