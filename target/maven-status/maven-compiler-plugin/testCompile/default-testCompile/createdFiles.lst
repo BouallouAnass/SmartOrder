@@ -1,6 +1,0 @@
-com/smartorder/domain/model/OrderLineTest.class
-com/smartorder/domain/model/OrderTest.class
-com/smartorder/application/usecase/PlaceOrderUseCaseImplTest.class
-com/smartorder/domain/model/MoneyTest.class
-com/smartorder/domain/model/ProductTest.class
-com/smartorder/BaseIntegrationTest.class
